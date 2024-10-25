@@ -71,7 +71,13 @@ def run_exe(exe_path):
     # Close handles (not necessary for the demo, but good practice)
     ctypes.windll.kernel32.CloseHandle(process_info.hThread)
     ctypes.windll.kernel32.CloseHandle(process_info.hProcess)
-
-# Example usage
-exe_path = r"UltimMC\UltimMC.exe"  # Replace with your executable path
-run_exe(exe_path)
+while True:
+    exe_path = input("path >> ")  # Replace with your executable path
+    if exe_path == "":
+        break;
+    try:
+        run_exe(exe_path)
+    except FileNotFoundError as e:
+        print("FileNotFoundError: "+e)
+    except RuntimeError as e:
+        print("RuntimeError: "+e)
